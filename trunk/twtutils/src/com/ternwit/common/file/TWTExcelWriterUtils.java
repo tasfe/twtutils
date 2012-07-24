@@ -2,7 +2,6 @@ package com.ternwit.common.file;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
@@ -25,6 +24,11 @@ import com.ternwit.common.basic.TWTListUtils;
 import com.ternwit.common.basic.TWTStringUtils;
 import com.ternwit.common.date.TWTDateUtils;
 
+/**
+ * 
+ * @version 1.0
+ *
+ */
 public class TWTExcelWriterUtils {
 	
 	public static final String ERR_NULL_WORKBOOK = "Workbook is not initialized";
@@ -50,12 +54,12 @@ public class TWTExcelWriterUtils {
 
 		validateFile(file);
 
-		String name = file.getAbsolutePath();
+//		String name = file.getAbsolutePath();
 
 		try {
 			writableWorkbook = Workbook.createWorkbook(file);
-			outputStream = new FileOutputStream(name);
-			writableWorkbook = Workbook.createWorkbook(outputStream);
+//			outputStream = new FileOutputStream(name);
+//			writableWorkbook = Workbook.createWorkbook(outputStream);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -68,11 +72,11 @@ public class TWTExcelWriterUtils {
 	/* create default sheet */
 	public WritableSheet createWritableSheet(String sheetName, int sheetIndex) {
 		
-		// validateSheetName();
+		// validateSheetName
 		if (TWTStringUtils.isBlank(sheetName)) {
 			throw new NullPointerException(ERR_NULL_SHEET_NAME);
 		}
-		// validateSheetIndex();
+		// validateSheetIndex
 		if (0 > sheetIndex) {
 			throw new IllegalArgumentException(ERR_NEGATIVE_SHEET_INDEX);
 		}
