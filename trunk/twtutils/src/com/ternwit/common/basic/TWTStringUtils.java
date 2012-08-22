@@ -120,7 +120,7 @@ public final class TWTStringUtils extends StringUtils {
 	}
 	
 	/**
-	 * @return insert("abcde", 2, "<br/>") -- ab<br />cd<br />e<br />
+	 * @return insert("abcde", 2, "#") -- ab#cd#e#
 	 */
 	public static String insert(String inputStr, int fixLength, String insertStr) {
 		return StringUtils.join(splitWorker(inputStr, fixLength, insertStr)); 
