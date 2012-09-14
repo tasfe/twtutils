@@ -166,7 +166,8 @@ public final class TWTFileUtils {
 		try {
 			bufferedReader = getBufferedReader(url);
 			while (null != (temp = bufferedReader.readLine())) {
-				content = content + temp;
+				content = content + temp + "\r\n";
+//				content = content + temp + "\r\n";
 			}
 
 		} catch (FileNotFoundException e) {
@@ -264,4 +265,5 @@ public final class TWTFileUtils {
 		Properties properties = manager.loadProperties(propertiesFile);
 		return properties;
 	}
+	
 }
