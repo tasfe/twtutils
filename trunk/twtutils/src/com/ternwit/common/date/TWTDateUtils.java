@@ -27,6 +27,7 @@ import com.ternwit.common.basic.TWTStringUtils;
  * 		getStringFromTimestamp()
  * 		getAgeFromDOB()
  * 		isLeapYear()
+ * 		getMonthIntegerList()
  */
 public final class TWTDateUtils extends DateUtils {
 	
@@ -73,6 +74,21 @@ public final class TWTDateUtils extends DateUtils {
 		List<String> list = new ArrayList<String>();
 		for (int i = 1; i <= 12; i++) {
 			list.add(i + CommonConstants.EMPTYSTRING);
+		}
+		return list;
+	}
+	
+	/**
+	 * @return month integer list
+	 */
+	/* 
+	 * add in v1.1 misc fix
+	 * kind of a fix for twin method getMonthStringList()
+	 * */
+	public static List<Integer> getMonthIntegerList() {
+		List<Integer> list = new ArrayList<Integer>();
+		for (int i = 1; i <= 12; i++) {
+			list.add(i);
 		}
 		return list;
 	}
