@@ -167,7 +167,6 @@ public final class TWTFileUtils {
 			bufferedReader = getBufferedReader(url);
 			while (null != (temp = bufferedReader.readLine())) {
 				content = content + temp + "\r\n";
-//				content = content + temp + "\r\n";
 			}
 
 		} catch (FileNotFoundException e) {
@@ -254,6 +253,7 @@ public final class TWTFileUtils {
 	 * This method returns an instance of Properties with properties file loaded.
 	 * This method requires properties file included in class folder.
 	 * To include a properties file in class folder, right click on project, build path, 
+	 * Argument propertiesFile can be properties file name, full path is NOT required
 	 * 
 	 * added in version 1.2
 	 */
