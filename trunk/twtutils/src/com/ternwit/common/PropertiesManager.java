@@ -4,30 +4,35 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-/**
+/*
+ * Audit Log
+ * 2012-01-31 This class is created by Jobn Doe (can NOT remember his name)
  * 
- * @version 1.0
- *
- */
-public class PropertiesManager  {
+ * */
+/*
+ * load properties file by name
+ * full path is NOT required 
+ * */
+public class PropertiesManager {
 	private static volatile PropertiesManager INSTANCE;
 
 	protected PropertiesManager() {
 
 	}
-	
+
 	public synchronized Properties loadProperties(String propertiesFile) {
-		
+
 		Properties properties = new Properties();
-        try {
-        	InputStream in = PropertiesManager.class.getClassLoader().getResourceAsStream(propertiesFile);
+		try {
+			InputStream in = PropertiesManager.class.getClassLoader()
+					.getResourceAsStream(propertiesFile);
 			properties.load(in);
-			in.close(); 
-        } catch (IOException e) {
-        	System.out.println(e);
-        }
-        return properties;
-		
+			in.close();
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+		return properties;
+
 	}
 
 	private static synchronized PropertiesManager tryCreateInstance() {
@@ -36,7 +41,7 @@ public class PropertiesManager  {
 		}
 		return INSTANCE;
 	}
-	
+
 	public static PropertiesManager getInstance() {
 		PropertiesManager manager = INSTANCE;
 		if (manager == null) {
@@ -44,5 +49,5 @@ public class PropertiesManager  {
 		}
 		return manager;
 	}
-		
+
 }

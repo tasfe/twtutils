@@ -29,7 +29,7 @@ import com.ternwit.common.date.TWTDateUtils;
  * @version 1.0
  *
  */
-public class TWTExcelWriterUtils {
+public final class TWTExcelWriterUtils {
 	
 	public static final String ERR_NULL_WORKBOOK = "Workbook is not initialized";
 	public static final String ERR_NULL_SHEET = "Sheet is not initilized";

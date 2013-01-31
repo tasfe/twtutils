@@ -6,6 +6,14 @@ import java.sql.Timestamp;
 
 import com.ternwit.common.CommonConstants;
 
+/**
+ * @since version 1.1
+ * 
+ * */
+/*
+ * version 1.1
+ * 
+ * */
 public final class TWTFunctionUtils {
 
 	public static BigDecimal getBigDecimalFromString(String param) {
@@ -155,6 +163,10 @@ public final class TWTFunctionUtils {
 		return longString;
 	}
 
+	/*
+	 * notice: this method can NOT guarantee unique id in a pretty fast machine
+	 * 
+	 * */
 	public static Long getPrimaryKey() {
 		Timestamp now = new Timestamp(System.currentTimeMillis());
 

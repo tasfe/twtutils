@@ -28,20 +28,27 @@ public final class TWTStringUtils extends StringUtils {
 	/**
 	 * @return returns true if starts with forward slash
 	 */
+	/*
+	 * if parameter string starts with "/", this method returns true 
+	 * otherwise, returns false
+	 * 
+	 * */
 	public static boolean startsWithForwardSlash(String inputStr) {
 		boolean result = false;
-		
 		result = StringUtils.startsWith(inputStr, FORWARD_SLASH);
-		
 		return result;
 	}
 
 	/**
 	 * @return returns true if starts with backward slash
 	 */
+	/*
+	 * if parameter string starts with "\", this method returns true 
+	 * otherwise, returns false
+	 * 
+	 * */
 	public static boolean startsWithBackwardSlash(String inputStr) {
 		boolean result = false;
-		
 		result = StringUtils.startsWith(inputStr, BACKWARD_SLASH);
 		return result;
 	}
@@ -51,7 +58,6 @@ public final class TWTStringUtils extends StringUtils {
 	 */
 	public static boolean startsWithDoubleForwardSlash(String inputStr) {
 		boolean result = false;
-		
 		result = StringUtils.startsWith(inputStr, DOUBLE_FORWARD_SLASH);
 		return result;
 	}
@@ -61,7 +67,6 @@ public final class TWTStringUtils extends StringUtils {
 	 */
 	public static boolean startsWithDoubleBackwardSlash(String inputStr) {
 		boolean result = false;
-		
 		result = StringUtils.startsWith(inputStr, DOUBLE_BACKWARD_SLASH);
 		return result;
 	}
@@ -71,7 +76,6 @@ public final class TWTStringUtils extends StringUtils {
 	 */
 	public static boolean endsWithForwardSlash(String inputStr) {
 		boolean result = false;
-		
 		result = StringUtils.endsWith(inputStr, FORWARD_SLASH);
 		return result;
 	}
@@ -81,7 +85,6 @@ public final class TWTStringUtils extends StringUtils {
 	 */
 	public static boolean endsWithBackwardSlash(String inputStr) {
 		boolean result = false;
-		
 		result = StringUtils.endsWith(inputStr, BACKWARD_SLASH);
 		return result;
 	}
@@ -91,7 +94,6 @@ public final class TWTStringUtils extends StringUtils {
 	 */
 	public static boolean endsWithDoubleForwardSlash(String inputStr) {
 		boolean result = false;
-		
 		result = StringUtils.endsWith(inputStr, DOUBLE_FORWARD_SLASH);
 		return result;
 	}
@@ -101,7 +103,6 @@ public final class TWTStringUtils extends StringUtils {
 	 */
 	public static boolean endsWithDoubleBackwardSlash(String inputStr) {
 		boolean result = false;
-		
 		result = StringUtils.endsWith(inputStr, DOUBLE_BACKWARD_SLASH);
 		return result;
 	}
@@ -112,6 +113,7 @@ public final class TWTStringUtils extends StringUtils {
 	public static String escapeLineBreakForWeb(String inputStr) {
 		String outputStr = EMPTYSTRING;
 		
+		 /* should first replace \r\n, otherwise <br /> tag will be duplicate */
 		outputStr = StringUtils.replace(inputStr, "\r\n", "<br />");
 		outputStr = StringUtils.replace(outputStr, "\r", "<br />");
 		outputStr = StringUtils.replace(outputStr, "\n", "<br />");
@@ -119,21 +121,47 @@ public final class TWTStringUtils extends StringUtils {
 		return outputStr;
 	}
 	
-	/**
-	 * @return insert("abcde", 2, "#") -- ab#cd#e#
+	/*
+	 * see
+	 * inputStr = abced
+	 * fixLength = 2
+	 * insertStr = |
+	 * returns ab|cd|e|
 	 */
 	public static String insert(String inputStr, int fixLength, String insertStr) {
 		return StringUtils.join(splitWorker(inputStr, fixLength, insertStr)); 
 	}
 	
+	/*
+	 * see 
+	 * inputStr = abcedfg
+	 * fixLength = 2
+	 * result String[] is [ab, cd, ef, g]
+	 * */
 	public static String[] split(String inputStr, int fixLength) {
 		return splitWorker(inputStr, fixLength, EMPTYSTRING);
 	}
 	
+	/*
+	 * see 
+	 * inputStr = abcedfg
+	 * fixLength = 2
+	 * insertStr = |
+	 * result String[] is [ab|, cd|, ef|, g|]
+	 * */
 	public static String[] split(String inputStr, int fixLength, String insertStr) {
 		return splitWorker(inputStr, fixLength, insertStr);
 	}
 	
+	/*
+	 * fixLength can be understand as step
+	 * see 1 - 3 - 5 - 7, step is 2
+	 * inputStr = abcdefg
+	 * fixLength = 2
+	 * insertStr = %
+	 * returns [ab%, cd%, ef%, g%]
+	 * 
+	 * */
 	private static String[] splitWorker(String inputStr, int fixLength, String insertStr) {
 		if (null == inputStr) {
 			return new String[]{};

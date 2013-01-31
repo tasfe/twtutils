@@ -8,6 +8,8 @@ import org.apache.commons.collections.ListUtils;
  * 
  * @version 1.0
  *
+ * v1.2 add 
+ * 			public static boolean isEmpty(List<? extends Object> list)
  */
 public final class TWTListUtils extends ListUtils {
 	/**
@@ -27,7 +29,7 @@ public final class TWTListUtils extends ListUtils {
 		 * if list is empty
 		 * return true
 		 */
-		if (0 == list.size()) {
+		if (isEmpty(list)) {
 			return true;
 		}
 		
@@ -68,6 +70,30 @@ public final class TWTListUtils extends ListUtils {
 		 * return true
 		 */
 		if (null == list) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * @param
+	 * @return return true if input param list is empty
+	 * @throws throws IllegalArgumentException is input param list is null
+	 * 
+	 * */
+	/* added in version 1.2 */
+	public static boolean isEmpty(List<? extends Object> list) {
+		/*
+		 * if list is null
+		 * return true
+		 */
+		if (isNull(list)) {
+			return true;
+		}
+		
+		/* size 0, return true */
+		if(0 == list.size()) {
 			return true;
 		}
 		
