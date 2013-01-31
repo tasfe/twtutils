@@ -1,4 +1,0 @@
-this is test contentthis is test content\
-怎么确定一个文件的编码格式
-中文测试
-如果前8000个字符并不符合侦测条件，似乎侦测的可信度会受到影响
