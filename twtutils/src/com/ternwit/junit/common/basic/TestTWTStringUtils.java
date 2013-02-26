@@ -108,5 +108,13 @@ public class TestTWTStringUtils {
 		
 		assertArrayEquals(expected, TWTStringUtils.split(original, 3, "%"));
 	}
+	
+	@Test
+	public void testInsertStringStringInt() {
+		String originalStr = "abcde";
+		String insertStr = "TEST_INSERT";
+		int index = 1;
+		assertEquals("aTEST_INSERTbcde", TWTStringUtils.insert(originalStr, insertStr, index));
+	}
 
 }
