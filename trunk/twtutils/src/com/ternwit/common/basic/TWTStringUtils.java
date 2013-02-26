@@ -19,9 +19,12 @@ import org.apache.commons.lang.StringUtils;
  * 				endsWithDoubleBackwardSlash
  * v1.2 added
  * 				escapeLineBreakForWeb
- * 				insert
+ * 				insert(String inputStr, int fixLength, String insertStr)
  * 				split
  * 				splitWorker
+ * 
+ * 20130226 added
+ * 					insert(String originalStr, String insertStr, int index)
  */
 public final class TWTStringUtils extends StringUtils {
 	
@@ -128,14 +131,46 @@ public final class TWTStringUtils extends StringUtils {
 	 * insertStr = |
 	 * returns ab|cd|e|
 	 */
+	/**
+	 * @return
+	 * inputStr = abced<br>
+	 * fixLength = 2<br>
+	 * insertStr = |<br>
+	 * returns ab|cd|e|
+	 * */
 	public static String insert(String inputStr, int fixLength, String insertStr) {
 		return StringUtils.join(splitWorker(inputStr, fixLength, insertStr)); 
+	}
+	
+	/*
+	 * see
+	 * originalStr = abcde
+	 * index = 2
+	 * insertStr = TEST_INSERT
+	 * return abTEST_INSERTcde
+	 * 
+	 * */
+	/**
+	 * @return
+	 * originalStr = abcde<br>
+	 * index = 2<br>
+	 * insertStr = TEST_INSERT<br>
+	 * return abTEST_INSERTcde
+	 * */
+	public static String insert(String originalStr, String insertStr, int index) {
+		return originalStr.substring(0, index) + insertStr + originalStr.substring(index, originalStr.length());
 	}
 	
 	/*
 	 * see 
 	 * inputStr = abcedfg
 	 * fixLength = 2
+	 * result String[] is [ab, cd, ef, g]
+	 * */
+	/**
+	 * @return
+	 * inputStr = abcedfg<br>
+	 * fixLength = 2<br>
 	 * result String[] is [ab, cd, ef, g]
 	 * */
 	public static String[] split(String inputStr, int fixLength) {
@@ -147,6 +182,13 @@ public final class TWTStringUtils extends StringUtils {
 	 * inputStr = abcedfg
 	 * fixLength = 2
 	 * insertStr = |
+	 * result String[] is [ab|, cd|, ef|, g|]
+	 * */
+	/**
+	 * @return
+	 * inputStr = abcedfg<br>
+	 * fixLength = 2<br>
+	 * insertStr = |<br>
 	 * result String[] is [ab|, cd|, ef|, g|]
 	 * */
 	public static String[] split(String inputStr, int fixLength, String insertStr) {
@@ -161,6 +203,13 @@ public final class TWTStringUtils extends StringUtils {
 	 * insertStr = %
 	 * returns [ab%, cd%, ef%, g%]
 	 * 
+	 * */
+	/**
+	 * @return
+	 * inputStr = abcdefg<br>
+	 * fixLength = 2<br>
+	 * insertStr = %<br>
+	 * returns [ab%, cd%, ef%, g%]
 	 * */
 	private static String[] splitWorker(String inputStr, int fixLength, String insertStr) {
 		if (null == inputStr) {
