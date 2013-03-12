@@ -14,7 +14,8 @@ import com.ternwit.common.CommonConstants;
  * */
 /*
  * Audit Log
- * 2013-01-31 add get32BitMD5 and get16BitMD5
+ * 2013-01-31 	add get32BitMD5 
+ * 				add get16BitMD5
  * 
  * */
 public final class TWTFunctionUtils {
