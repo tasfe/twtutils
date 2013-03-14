@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder;
 /*
  * Audit Log
  * 2013-01-31 new created
+ * 2013-03-14 modified fromJson parameter from Class<Object> to Class<?> and test passed
  * */
 public class TWTGsonUtils {
 
@@ -24,7 +25,7 @@ public class TWTGsonUtils {
 		return getInstance(true).toJson(obj);
 	}
 
-	public static Object fromJson(String json, Class<Object> clazz) {
+	public static Object fromJson(String json, Class<?> clazz) {
 		return getInstance(false).fromJson(json, clazz);
 	}
 }
