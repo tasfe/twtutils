@@ -7,6 +7,7 @@ import java.util.List;
 import org.junit.Test;
 
 import com.ternwit.common.basic.TWTGsonUtils;
+import com.ternwit.common.file.TWTFileUtils;
 /*
  * Audit Log
  * 2013-01-31 new created full test passed 
@@ -37,6 +38,15 @@ public class TestTWTGsonUtils {
 		list.add(hob3);
 		person.setHobbies(list);
 		System.out.println(TWTGsonUtils.getInstance(false).toJson(person));
+	}
+	
+	@Test
+	public void testFromJson() {
+		String path = "C:\\eclipse\\workspace\\twtutils\\testResources\\person.json";
+		String content = new TWTFileUtils().readFileToString(path);
+		Person p = (Person)TWTGsonUtils.fromJson(content, Person.class);
+		System.out.println(p.getPersonName().getName());
+		System.out.println(p.getDOB());
 	}
 	
 	class Person {
