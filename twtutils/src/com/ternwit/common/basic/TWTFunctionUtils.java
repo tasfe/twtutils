@@ -2,9 +2,9 @@ package com.ternwit.common.basic;
 
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
+
+import org.apache.commons.codec.digest.DigestUtils;
 
 import com.ternwit.common.CommonConstants;
 
@@ -16,6 +16,9 @@ import com.ternwit.common.CommonConstants;
  * Audit Log
  * 2013-01-31 	add get32BitMD5 
  * 				add get16BitMD5
+ * 
+ * 2013-03-18 	modify get32BitMD5 using Apache Common Codec
+ * 			 	modify get16BitMD5 using Apache Common Codec
  * 
  * */
 public final class TWTFunctionUtils {
@@ -211,54 +214,35 @@ public final class TWTFunctionUtils {
 	}
 	
 	public static String get32BitMD5(String plainText) {
-		MessageDigest md = null;
-		try {
-			md = MessageDigest.getInstance("MD5");
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		md.update(plainText.getBytes());
-		byte b[] = md.digest();
-
-		int i;
-
-		StringBuffer buf = new StringBuffer("");
-		for (int offset = 0; offset < b.length; offset++) {
-			i = b[offset];
-			if (i < 0) {
-				i += 256;
-			}
-			if (i < 16) {
-				buf.append("0");
-			}
-			buf.append(Integer.toHexString(i));
-		}
-		return buf.toString();
+		return DigestUtils.md5Hex(plainText);
 	}
 	
 	public static String get16BitMD5(String plainText) {
-		MessageDigest md = null;
-		try {
-			md = MessageDigest.getInstance("MD5");
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		}
-		md.update(plainText.getBytes());
-		byte b[] = md.digest();
-
-		int i;
-
-		StringBuffer buf = new StringBuffer("");
-		for (int offset = 0; offset < b.length; offset++) {
-			i = b[offset];
-			if (i < 0) {
-				i += 256;
-			}
-			if (i < 16) {
-				buf.append("0");
-			}
-			buf.append(Integer.toHexString(i));
-		}
-		return buf.toString().substring(8, 24);
+//		MessageDigest md = null;
+//		try {
+//			md = MessageDigest.getInstance("MD5");
+//		} catch (NoSuchAlgorithmException e) {
+//			e.printStackTrace();
+//		}
+//		md.update(plainText.getBytes());
+//		byte b[] = md.digest();
+//
+//		int i;
+//
+//		StringBuffer buf = new StringBuffer("");
+//		for (int offset = 0; offset < b.length; offset++) {
+//			i = b[offset];
+//			if (i < 0) {
+//				i += 256;
+//			}
+//			if (i < 16) {
+//				buf.append("0");
+//			}
+//			buf.append(Integer.toHexString(i));
+//		}
+//		
+//		return buf.toString().substring(8, 24);
+		
+		return DigestUtils.md5Hex(plainText).substring(8, 24);
 	}
 }
