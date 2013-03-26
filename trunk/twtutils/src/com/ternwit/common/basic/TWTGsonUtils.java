@@ -7,6 +7,7 @@ import com.google.gson.GsonBuilder;
  * Audit Log
  * 2013-01-31 new created
  * 2013-03-14 modified fromJson parameter from Class<Object> to Class<?> and test passed
+ * 2013-03-26 modified toJson method, added disableHtmlEscaping
  * */
 public class TWTGsonUtils {
 
@@ -14,10 +15,12 @@ public class TWTGsonUtils {
 		Gson gson = null;
 		/* pretty print */
 		if (prettyPrint) {
-			gson = new GsonBuilder().setPrettyPrinting().create();
+			/* disableHtmlEscaping will print HTML tag as it is */
+			gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
 		} else {
 			gson = new GsonBuilder().create();
 		}
+		
 		return gson;
 	}
 
