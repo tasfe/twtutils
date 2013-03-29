@@ -9,25 +9,26 @@ import com.ternwit.front.pqgrid.grid.PQGrid.HoverMode;
 import com.ternwit.front.pqgrid.model.ColumnModel;
 import com.ternwit.front.pqgrid.model.DataModel;
 import com.ternwit.front.pqgrid.model.EditModel;
+import com.ternwit.front.pqgrid.model.ScrollModel;
 import com.ternwit.front.pqgrid.model.SelectionModel;
-import com.ternwit.front.pqgrid.model.EditModel.SaveKey;
-import com.ternwit.front.pqgrid.model.SelectionModel.Mode;
-import com.ternwit.front.pqgrid.model.SelectionModel.Type;
 
 public class RunPQGrid {
 
-	// 或见PQGridWeb的MainServlet.draw()
 	public static void main(String[] args) {
 		PQGrid grid = new PQGrid();
 		grid.setWidth(700);
 		grid.setHeight(400);
 		grid.setSortable(true);
 		grid.setResizable(true);
-		grid.setFlexHeight(false);
+		grid.setFlexHeight(true);
 		grid.setFlexWidth(false);
+		grid.setHoverMode(HoverMode.ROW);
+		grid.setNumberCellWidth(100);
+		grid.setTitle("World 100");
+		grid.setWrap(false);
 		
 		List<String[]> data = new ArrayList<String[]>();
-		data.add(new String[]{"1","Exxon Mobil","339,938.0","36,130.0"});
+		data.add(new String[]{"1","Exxon Mobil 超长字符串 It determines the behaviour of cell content which doesn't fit in a single line within the width of the cell. The text in the cells wraps to next line if wrap = true otherwise the overflowing text becomes hidden and continuation symbol ... is displayed at the end.","339,938.0","36,130.0"});
 		data.add(new String[]{"2","Wal-Mart Stores","315,654.0","11,231.0"});
 		data.add(new String[]{"3","Royal Dutch Shell","306,731.0","25,311.0"});
 		data.add(new String[]{"4","BP","267,600.0","22,341.0"});
@@ -82,32 +83,15 @@ public class RunPQGrid {
 		
 		grid.setColModel(colModel);
 		
-		SelectionModel selectionModel = new SelectionModel();
-		selectionModel.setType(Type.CELL);
-		selectionModel.setMode(Mode.BLOCK);
-		grid.setSelectionModel(selectionModel);
-		
-		grid.setDraggable(true);
-		
-		grid.setResizable(true);
-		
-		grid.setHoverMode(HoverMode.ROW);
-		
-		grid.setTitle("NASDAQ");
-		grid.setTopVisible(false);
-		
-		grid.setColumnBorders(false);
-		
-		grid.setFreezeCols(1);
-		grid.setNumberCell(true);
-		grid.setNumberCellWidth(100);
+		ScrollModel scrollModel = new ScrollModel();
+		scrollModel.setHorizontal(true);
+		grid.setScrollModel(scrollModel);
 		
 		EditModel editModel = new EditModel();
-		editModel.setClicksToEdit(2);
-		editModel.setSaveKey(SaveKey.ENTER);
-		
 		grid.setEditModel(editModel);
-		grid.setWrap(false);
+		
+		SelectionModel selectionModel = new SelectionModel();
+		grid.setSelectionModel(selectionModel);
 		
 		System.out.println(new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create().toJson(grid));
 	}
