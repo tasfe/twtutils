@@ -1,4 +1,4 @@
-package com.ternwit.common.ofc2;
+package com.ternwit.front.ofc2;
 
 /* 
  * NOT tested yet
