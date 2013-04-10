@@ -3,6 +3,7 @@ package com.ternwit.common.basic;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.UUID;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -20,6 +21,7 @@ import com.ternwit.common.CommonConstants;
  * 2013-03-18 	modify get32BitMD5 using Apache Common Codec
  * 			 	modify get16BitMD5 using Apache Common Codec
  * 
+ * 2013-04-10	add getUUID tested
  * */
 public final class TWTFunctionUtils {
 
@@ -244,5 +246,10 @@ public final class TWTFunctionUtils {
 //		return buf.toString().substring(8, 24);
 		
 		return DigestUtils.md5Hex(plainText).substring(8, 24);
+	}
+	
+	public static String getUUID() {
+		String uuid = UUID.randomUUID().toString();
+		return TWTStringUtils.replace(uuid, "-", "");
 	}
 }
