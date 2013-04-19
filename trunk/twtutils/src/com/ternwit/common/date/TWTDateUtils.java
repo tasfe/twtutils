@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.time.DateUtils;
@@ -28,6 +29,10 @@ import com.ternwit.common.basic.TWTStringUtils;
  * 		getAgeFromDOB()
  * 		isLeapYear()
  * 		getMonthIntegerList()
+ * 2013-04-16 add
+ * 		getCurrentTime()
+		getCurrentTimeString()
+		getCurrentDate()
  */
 public final class TWTDateUtils extends DateUtils {
 	
@@ -165,8 +170,7 @@ public final class TWTDateUtils extends DateUtils {
 	
 	/**
 	 * @return return age in Integer
-	 */
-	/*
+	 *
 	 * This method will return current age of a person by accepting his date of birth
 	 * added in v1.1
 	 */
@@ -197,7 +201,7 @@ public final class TWTDateUtils extends DateUtils {
 		return result;
 	}
 	
-	/*
+	/**
 	 * This method takes a string value and parse it into java.sql.Time
 	 * added in v1.1
 	 */
@@ -211,7 +215,7 @@ public final class TWTDateUtils extends DateUtils {
 		return result;
 	}
 
-	/*
+	/**
 	 * This method takes a string value and parse it into java.sql.Timestamp
 	 * added in v1.1
 	 */
@@ -225,7 +229,7 @@ public final class TWTDateUtils extends DateUtils {
 		return result;
 	}
 	
-	/*
+	/**
 	 * This method takes a java.sql.Time value and parse it into string
 	 * added in v1.1
 	 */
@@ -239,7 +243,7 @@ public final class TWTDateUtils extends DateUtils {
 		return timeString;
 	}
 
-	/*
+	/**
 	 * This method takes a java.sql.Timestamp value and parse it into string
 	 * added in v1.1
 	 */
@@ -253,7 +257,7 @@ public final class TWTDateUtils extends DateUtils {
 		return timeStampString;
 	}
 	
-	/*
+	/**
 	 * Is a multiple of 4, and not a multiple of 100; or multiples of 400
 	 * This method judges if input year is leap year or not
 	 * added in v1.1
@@ -268,5 +272,29 @@ public final class TWTDateUtils extends DateUtils {
 		}
 
 		return true;
+	}
+	
+	/**
+	 * This method return an instance of  java.sql.Time stands for current time<br>
+	 * <b>Not recommend using Time, use Timestamp instead</b>
+	 * */
+	public static Time getCurrentTime() {
+		return new Time(getCalendar().getTimeInMillis());
+	}
+	
+	/** 
+	 * Return a String of current time like "08:00"
+	 * 
+	 * */
+	public static String getCurrentTimeString() {
+		return getCurrentTime().toString();
+	}
+	
+	/**
+	 * Return current Date
+	 * 
+	 * */
+	public static Date getCurrentDate() {
+		return getCalendar().getTime();
 	}
 }
