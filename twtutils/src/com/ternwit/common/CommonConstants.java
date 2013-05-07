@@ -4,6 +4,7 @@ package com.ternwit.common;
  * Audit log
  * v1.1 add slash part
  * 2013-01-31 add some common system info keys
+ * 2013-05-07 modify HTML_TAB and DOUBLE_HTML_TAB, cut them into half
  */
 public interface CommonConstants {
 	/*
@@ -11,8 +12,8 @@ public interface CommonConstants {
 	 */
 	public static final String EMPTYSTRING = "";
 	public static final String NULLSTRING = null;
-	public static final String HTML_TAB = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-	public static final String DOUBLE_HTML_TAB = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+	public static final String HTML_TAB = "&nbsp;&nbsp;&nbsp;&nbsp;";
+	public static final String DOUBLE_HTML_TAB = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 	
 	
 	/* 
