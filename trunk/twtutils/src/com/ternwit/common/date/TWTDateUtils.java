@@ -31,8 +31,17 @@ import com.ternwit.common.basic.TWTStringUtils;
  * 		getMonthIntegerList()
  * 2013-04-16 add
  * 		getCurrentTime()
-		getCurrentTimeString()
-		getCurrentDate()
+ *		getCurrentTimeString()
+ *		getCurrentDate()
+ * 2013-04-25 add not fully tested
+ * 		initCalendarForWeek
+ * 		getFirstDateOfCurrentWeek
+ * 		getLastDateOfCurrentWeek
+ * 		initCalendarForMonth
+ * 		getFirstDateOfCurrentMonth
+ * 		getLastDateOfCurrentMonth
+ * 		getfirstDateOfCurrentYear
+ * 		getLastDateOfCurrentYear
  */
 public final class TWTDateUtils extends DateUtils {
 	
@@ -296,5 +305,118 @@ public final class TWTDateUtils extends DateUtils {
 	 * */
 	public static Date getCurrentDate() {
 		return getCalendar().getTime();
+	}
+	
+	/**
+	 * private method invoked by 
+	 * 		getFirstDateOfCurrentWeek
+	 * 		getLastDateOfCurrentWeek
+	 * */
+	private static Calendar initCalendarForWeek() {
+		Calendar calendar = getCalendar();
+		// 当前时间是本月的第几周
+		int week = calendar.get(Calendar.WEEK_OF_YEAR);
+		// 当前时间是几几年
+		int year = calendar.get(Calendar.YEAR);
+		
+		calendar.clear();
+		calendar.set(Calendar.WEEK_OF_MONTH, week);
+		calendar.set(Calendar.YEAR, year);
+		return calendar;
+	}
+	
+	/**
+	 * return first day(sunday)'s date of current week.
+	 * can work with the situation when first day is in one month 
+	 * while last day is in next month
+	 * 
+	 * */
+	public static Date getFirstDateOfCurrentWeek() {
+		// 当前周的第一天(星期天)
+		return initCalendarForWeek().getTime();
+	}
+	
+	/**
+	 * return last day(saturday)'s date of current week.
+	 * can work with the situation when first day is in one month 
+	 * while last day is in next month
+	 * 
+	 * */
+	public static Date getLastDateOfCurrentWeek() {
+		Calendar calendar = initCalendarForWeek();
+		// 设定为本周周六
+		calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
+		// 当前周的第一天(星期六)
+		return calendar.getTime();
+	}
+	
+	/**
+	 * private method invoked by 
+	 * 		getFirstDateOfCurrentMonth
+	 * 		getLastDateOfCurrentMonth
+	 * */
+	private static Calendar initCalendarForMonth() {
+		Calendar calendar = getCalendar();
+		// 当前时间是几月, 例如2月则month为1
+		int month = calendar.get(Calendar.MONTH);
+		// 当前时间是几几年
+		int year = calendar.get(Calendar.YEAR);
+		
+		calendar.clear();
+		calendar.set(Calendar.YEAR, year);
+		calendar.set(Calendar.MONTH, month);
+		return calendar;
+	}
+	
+	/**
+	 * return first day's date of current month.
+	 * can work with leap year's Feb
+	 * 
+	 * */
+	public static Date getFirstDateOfCurrentMonth() {
+		return initCalendarForMonth().getTime();
+	}
+	
+	/**
+	 * return last day's date of current month.
+	 * can work with leap year's Feb
+	 * 
+	 * */
+	public static Date getLastDateOfCurrentMonth() {
+		Calendar calendar = initCalendarForMonth();
+		calendar.set(Calendar.DAY_OF_MONTH, calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+		return calendar.getTime();
+	}
+	
+	/**
+	 * return first day's date of current year.
+	 * can wrok with leap year
+	 * 
+	 * */
+	public static Date getFirstDateOfCurrentYear() {
+		Calendar calendar = getCalendar();
+		int st = calendar.getActualMinimum(Calendar.DAY_OF_YEAR);
+		int year = calendar.get(Calendar.YEAR);
+		
+		calendar.clear();
+		calendar.set(Calendar.YEAR, year);
+		calendar.set(Calendar.DAY_OF_YEAR, st);
+		return calendar.getTime();
+	}
+	
+	/**
+	 * return last day's date of current year.
+	 * can wrok with leap year
+	 * 
+	 * */
+	public static Date getLastDateOfCurrentYear() {
+		Calendar calendar = getCalendar();
+		int end = calendar.getActualMaximum(Calendar.DAY_OF_YEAR);
+		int year = calendar.get(Calendar.YEAR);
+		
+		calendar.clear();
+		calendar.set(Calendar.YEAR, year);
+		calendar.set(Calendar.DAY_OF_YEAR, end);
+		return calendar.getTime();
 	}
 }
